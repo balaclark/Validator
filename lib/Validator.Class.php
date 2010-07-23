@@ -176,7 +176,7 @@ class Validator {
 			if (!isset($matches) || count($matches) != '4') throw new Exception('Misformed validation conditional: '.$condition);
 
 			list($origin, $reference, $operator, $ref_value) = $matches;
-			if (!isset($this->fields[$reference])) throw new Exception ('Reference field doesn\'t exist');
+			if (!isset($this->fields[$reference])) return;
 
 			// check if the condition is met, don't continue running if it is not
 			switch ($operator) {
