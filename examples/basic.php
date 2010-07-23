@@ -1,13 +1,18 @@
 <?php
+
+include 'foo/Foo.php';
+
 // include the class & helpers
 require '../lib/Validator.Class.php';
 require '../lib/Validator.Helpers.php';
 
-// the validation array can be stored in a file, passed directly as an array
-$config_file = dirname(__FILE__) . '/config/rules.php';
+$rules['basic'] = array(
+	'name' => 'required',
+	'email' => 'required|email'
+);
 
 // initialise the Validator
-$validator = new Validator($config_file);
+$validator = new Validator($rules);
 
 // run the validation checks on the submitted data
 $valid = $validator->valid('basic', $_POST);
@@ -19,6 +24,7 @@ if ($valid) {
 
 // get any error messages
 $errors = $validator->errors();
+
 ?>
 <!DOCTYPE html>
 <html>
