@@ -35,7 +35,7 @@ class Validator {
 
 		if (is_string($rules) && file_exists($rules)) require $rules;
 		else if (is_array($rules)) $validation = $rules;
-
+		
 		$this->rules = $validation;
 	}
 
@@ -56,10 +56,11 @@ class Validator {
 	 * @return boolean
 	 */
 	function valid($form, $fields) {
-
+		
 		// only proceed if there are some rules & fields set
-		if (!isset($this->rules[$form])) return true;
-		else if (empty($fields)) return;
+		if (!isset($this->rules[$form]) || empty($fields)) {
+			throw new exception('No validation rules set for form: "' . $form . '"');
+		}
 		
 		$this->fields = $fields;
 		$this->messages = array();
