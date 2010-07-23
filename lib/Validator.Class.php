@@ -56,12 +56,14 @@ class Validator {
 	 * @return boolean
 	 */
 	function valid($form, $fields) {
-		
+	
 		// only proceed if there are some rules & fields set
-		if (!isset($this->rules[$form]) || empty($fields)) {
+		if (!isset($this->rules[$form])) {
 			throw new exception('No validation rules set for form: "' . $form . '"');
 		}
-		
+
+		if (empty($fields)) return;
+
 		$this->fields = $fields;
 		$this->messages = array();
 
