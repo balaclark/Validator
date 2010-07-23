@@ -1,7 +1,5 @@
 <?php
 
-include 'foo/Foo.php';
-
 // include the class & helpers
 require '../lib/Validator.Class.php';
 require '../lib/Validator.Helpers.php';
