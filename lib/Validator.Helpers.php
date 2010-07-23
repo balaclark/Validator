@@ -95,16 +95,3 @@ function form_value($name, $form) {
 function form_error($name, $errors) {
 	if (isset($errors[$name])) echo "<span class='error'>{$errors[$name]}</span>";
 }
-
-/**
- * Shorten a string to a specified length. Also appends a HTML ellipsis.
- *
- * @param string $string
- * @param integer $length
- * @return string
- */
-function shorten($string, $length) {
-	if (is_string($string)) {
-		return strlen($string) > $length ? trim(substr($string, 0, $length)) . '&#8230;' : $string;
-	}
-}
