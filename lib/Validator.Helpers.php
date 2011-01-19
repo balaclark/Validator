@@ -18,24 +18,26 @@
  * @param bool $id_as_value [optional] Use the data array key as input value
  * @return string
  */
-function form_select($name, $data, $form = null, $id_as_value = true) {
+function form_select($name, $data, $form = null, $id_as_value = true, $multiple = false) {
 
 	$default = (!is_null($form) && isset($form[$name])) ? $form[$name] : null;
 
-	$html = "<select name='$name' id='$name'>";
+	$_multiple = ($multiple) ? 'multiple="multiple"' : false;
+
+	$html = "<select name='$name' id='$name' $_multiple>";
 
 	foreach($data as $key => $value) {
 
 		$class = ('other' == strtolower($value)) ? 'class="show-other"' : '';
-		$selected = (!is_null($default) && ($key == $default || $value == $default)) ? 'selected="selected"' : '';
 		if (false === $id_as_value) $key = $value;
+		$selected = (!is_null($default) && ($key == $default || $value == $default)) ? 'selected="selected"' : '';
 
 		$html .= "<option value='$key' $class $selected>$value</option>";
 	}
 
 	$html .= '</select>';
 
-	return $html;
+	echo $html;
 }
 
 /**
@@ -63,7 +65,7 @@ function form_radio($name, $data, $form = null, $id_as_value = true) {
 		";
 	}
 
-	return $html;
+	echo $html;
 }
 
 /**
@@ -76,6 +78,8 @@ function form_radio($name, $data, $form = null, $id_as_value = true) {
  * @param array $form The submitted form array (e.g. $_POST / $_GET / $_REQUEST)
  */
 function form_value($name, $form) {
+
+	if (is_object($form)) $form = get_object_vars($form);
 
 	if (isset($form[$name])) echo $form[$name];
 
